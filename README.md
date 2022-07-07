@@ -5,6 +5,7 @@ Terminal utility to remap a number from a range to another.
 Similar to:
 - Processing/Arduino `map()`
 - Godot `range_lerp()`
+- Unreal Engine `Map Range Unclamped`
 
 ## Usage
 
