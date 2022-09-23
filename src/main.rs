@@ -7,7 +7,7 @@ fn main() {
 	let args = get_args();
 	match args {
 		None => {
-			println!("{}", "Pass arguments to calculate, in this order:".yellow().bold());
+			println!("{}", "Pass arguments to calculate, in this order:".bold());
 			println!("{}, {}, {}, {}, {}.",
 				"input".purple(),
 				"in min".red(),
