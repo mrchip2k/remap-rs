@@ -53,7 +53,7 @@ pub fn display_result(result: f64, arg_st: ArgStruct) {
 		let mut new = String::new();
 		let len = col_input.contents[i].chars().count();
 		let missing = col_input.width - len;
-		for i in 0..missing {
+		for _ in 0..missing {
 			new.push(' ');
 		}
 		new.push_str(&col_input.contents[i]);
@@ -61,12 +61,12 @@ pub fn display_result(result: f64, arg_st: ArgStruct) {
 	}
 	for i in 0..ROW_COUNT {
 		let mut new = String::new();
+		new.push_str(&col_output.contents[i]);
 		let len = col_output.contents[i].chars().count();
 		let missing = col_output.width - len;
-		for i in 0..missing {
+		for _ in 0..missing {
 			new.push(' ');
 		}
-		new.push_str(&col_output.contents[i]);
 		col_output.contents[i] = new;
 	}
 //// Bold on data columns
