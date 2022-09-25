@@ -1,9 +1,9 @@
-use std::{env::{self}};
 mod common;
 use common::*;
-use colored::*;
 mod display_result;
 use display_result::*;
+use std::{env::{self}};
+use colored::*;
 
 fn main() {
 	let args = get_args();

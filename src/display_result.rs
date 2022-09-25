@@ -1,5 +1,5 @@
-use colored::*;
 use crate::common::*;
+use colored::*;
 
 const ROW_COUNT: usize = 3;
 
