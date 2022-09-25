@@ -18,7 +18,7 @@ fn main() {
 				"out max".blue()
 			);
 			println!("Example:");
-			println!("remap {} {} {} {} {}",
+			println!("$> remap {} {} {} {} {}",
 				"0.75".purple(),
 				"0".red(),
 				"1".yellow(),
