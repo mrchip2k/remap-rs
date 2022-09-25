@@ -1,9 +1,11 @@
-use crate::ArgStruct;
+use std::fmt::format;
+
 use colored::*;
+use crate::common::*;
 
 const ROW_COUNT: usize = 3;
 
-pub fn display_result(result: f64, arg_st: ArgStruct) {
+pub fn display_result(result: NumType, arg_st: ArgStruct) {
 //// Create columns
 	let mut columns: Vec<Column> = Vec::new();
 	let col_explain_input = Column {
@@ -32,18 +34,18 @@ pub fn display_result(result: f64, arg_st: ArgStruct) {
 	};
 	let mut col_input = Column {
 		contents: [
-			arg_st.in_min.to_string(),
-			arg_st.input.to_string(),
-			arg_st.in_max.to_string()
+			rounded_display(arg_st.in_min),
+			rounded_display(arg_st.input),
+			rounded_display(arg_st.in_max)
 		],
 		width: 0 // unknown
 	};
 	col_input.calc_width();
 	let mut col_output = Column {
 		contents: [
-			arg_st.out_min.to_string(),
+			rounded_display(arg_st.out_min),
 			result.to_string(),
-			arg_st.out_max.to_string()
+			rounded_display(arg_st.out_max)
 		],
 		width: 0 // unknown
 	};
@@ -82,13 +84,14 @@ pub fn display_result(result: f64, arg_st: ArgStruct) {
 	columns.push(col_output);
 	columns.push(col_explain_output);
 //// Rendering the table
+	let mut print_buf = String::new();
 	for i in 0..ROW_COUNT {
-		let mut line_buf = String::new();
 		for col in &columns {
-			line_buf.push_str(&col.contents[i]);
+			print_buf.push_str(&col.contents[i]);
 		}
-		println!("{}", line_buf);
+		print_buf.push('\n');
 	}
+	println!("{}", print_buf);
 }
 
 struct Column {
@@ -104,4 +107,13 @@ impl Column {
 			}
 		}
 	}
+}
+
+fn rounded_display (num: NumType) -> String {
+	let rounded = (num * 100.0).round() / 100.0;
+	let mut rounded_str = rounded.to_string();
+	if num != rounded {
+		rounded_str.push_str("..");
+	}
+	rounded_str
 }

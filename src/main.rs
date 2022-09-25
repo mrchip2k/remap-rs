@@ -1,4 +1,6 @@
 use std::{env::{self}};
+mod common;
+use common::*;
 use colored::*;
 mod display_result;
 use display_result::*;
@@ -38,22 +40,14 @@ fn main() {
 	}
 }
 
-pub struct ArgStruct {
-	input: f64,
-	in_min: f64,
-	in_max: f64,
-	out_min: f64,
-	out_max: f64
-}
-
 fn get_args() -> Option<ArgStruct> {
 	let args_str: Vec<String> = env::args().collect();
 	if args_str.len() != 6 {
 		return None;
 	}
-	let mut args_float: Vec<f64> = Vec::new();
+	let mut args_float: Vec<NumType> = Vec::new();
 	for arg in args_str[1..].iter() {
-		let parsed = arg.parse::<f64>();
+		let parsed = arg.parse::<NumType>();
 		if parsed.is_err() {
 			return None;
 		}
@@ -68,6 +62,7 @@ fn get_args() -> Option<ArgStruct> {
 	});
 }
 
-fn remap(input: &f64, in_min: &f64, in_max: &f64, out_min: &f64, out_max: &f64) -> f64{
+fn remap(input: &NumType, in_min: &NumType, in_max: &NumType,
+	out_min: &NumType, out_max: &NumType) -> NumType{
 	out_min + (input-in_min) / (in_max-in_min) * (out_max-out_min)
 }
